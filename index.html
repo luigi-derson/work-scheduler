@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const credentials = {
+            username: "lui_gi_3@hotmail.com",
+            password: "932101322"
+        };
+        const url = 'https://vapiano.polaris-data.co.uk/employee/rota/sessions/5934?_dc=1571579204923&page=1&start=0&limit=25';
+
+        // 1. Create a new XMLHttpRequest object
+        let xhr = new XMLHttpRequest();
+
+        // 2. Configure it: GET-request for the URL /article/.../load
+        xhr.open('GET', url, [true, credentials.username, credentials.password]);
+
+        // 3. Send the request over the network
+        xhr.send();
+
+        // 4. This will be called after the response is received
+        xhr.onload = function() {
+        if (xhr.status != 200) { // analyze HTTP status of the response
+            alert(`Error ${xhr.status}: ${xhr.statusText}`); // e.g. 404: Not Found
+        } else { // show the result
+            alert(`Done, got ${xhr.response.length} bytes`); // responseText is the server
+        }
+        };
+
+        xhr.onprogress = function(event) {
+        if (event.lengthComputable) {
+            alert(`Received ${event.loaded} of ${event.total} bytes`);
+        } else {
+            alert(`Received ${event.loaded} bytes`); // no Content-Length
+        }
+
+        };
+
+        xhr.onerror = function() {
+        alert("Request failed");
+        };
+    </script>
+</body>
+</html>

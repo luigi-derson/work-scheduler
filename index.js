@@ -42,7 +42,7 @@ const generateSchedule = (week, days, hours) => {
 const getOffDays = (week) => week.map((day, index) => day.length < 7 ? index : false).filter(day => day);
 
 (async () => {
-	const browser = await puppeteer.launch({headless: false});
+	const browser = await puppeteer.launch({headless: true});
 	const page = await browser.newPage();
 	await page.goto('https://vapiano.polaris-data.co.uk/login');
 
@@ -69,8 +69,8 @@ const getOffDays = (week) => week.map((day, index) => day.length < 7 ? index : f
 	try {
 		const hours = await getHours.json();
 		const days = await getDays.json()
-		console.log(hours.length)
-		console.log(days.length)
+		// console.log(hours)
+		// console.log(days)
 		console.log(getOffDays(week));
 		console.log(generateSchedule(week, days, hours));
 	} catch(e) {
